@@ -29,4 +29,4 @@ composer update
 ```
 
 ### Get Started
-To get started using Flutterwave-PHP visit (here)[https://github.com/Flutterwave/flutterwave-php/tree/master/examples] to see code examples. 
+To get started using Flutterwave-PHP visit [here](https://github.com/Flutterwave/flutterwave-php/tree/master/examples) to see code examples. 
