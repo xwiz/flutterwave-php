@@ -1,15 +1,16 @@
-## Ip Check Example
-This is a template for you to use get information about an IP address throw Flutterwave API
+## Bin Check Example
+A Bin check is an operation that can return a card details form the first 6 digits of the card number.
+
 ```PHP
-use Flutterwave\Ip;
+use Flutterwave\Bin;
 use Flutterwave\Flutterwave;
 
 //merchantKey and apiKey can be found in your flutter developer console
 //env can be production or staging depending on your stage of development
 Flutterwave::setClientCredentials($merchantKey, $apiKey, $env);
 
-$ipAddress = "127.0.0.1";
-$result = Ip::check($ipAddress);
+$first6digits = "763537";
+$result = Bin::check($ipAddress);
 //$result is an instance of ApiResponse class which has
 //methods like getResponseData(), getStatusCode(), getResponseCode(), isSuccessfulResponse()
 ```

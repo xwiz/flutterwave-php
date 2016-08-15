@@ -1,15 +1,15 @@
-## Ip Check Example
-This is a template for you to use get information about an IP address throw Flutterwave API
+## Banks list
+This a tutorial on how to get a list of financial institutions in Nigeria
 ```PHP
-use Flutterwave\Ip;
+use Flutterwave\Banks;
 use Flutterwave\Flutterwave;
 
 //merchantKey and apiKey can be found in your flutter developer console
 //env can be production or staging depending on your stage of development
+//you must always remember to set client credentials before any operation
 Flutterwave::setClientCredentials($merchantKey, $apiKey, $env);
 
-$ipAddress = "127.0.0.1";
-$result = Ip::check($ipAddress);
+$result = Banks::allBanks();
 //$result is an instance of ApiResponse class which has
 //methods like getResponseData(), getStatusCode(), getResponseCode(), isSuccessfulResponse()
 ```

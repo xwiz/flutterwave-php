@@ -11,7 +11,7 @@ class Bin {
 
   /**
   * used to retrieve card information with first 6 digits
-  * @param string $first6digits
+  * @param string $first6digits first 6 digits of card number
   * @return ApiResponse
   */
   public static function check($first6digits) {
