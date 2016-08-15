@@ -13,3 +13,8 @@ The Flutterwave PHP library allows you to write php code to consume Flutterwaves
 ### Requirements
 - > PHP 5.5.3
 - mcrypt
+
+### Installation
+```
+composer require flutterwave/flutterwave-php
+```
