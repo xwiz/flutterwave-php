@@ -15,6 +15,15 @@ The Flutterwave PHP library allows you to write php code to consume Flutterwaves
 - mcrypt
 
 ### Installation
+
+Add flutterwave to your `composer.json` file
 ```
-composer require flutterwave/flutterwave-php
+"require": {
+  "flutterwave/flutterwave-php": "dev-master"
+}
+```
+
+Then do to update your packages with flutterwave-php
+```
+composer update
 ```
