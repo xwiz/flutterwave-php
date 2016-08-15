@@ -11,5 +11,5 @@ The Flutterwave PHP library allows you to write php code to consume Flutterwaves
 - Ip Check
 
 ### Requirements
-- PHP 5.5.3
+- > PHP 5.5.3
 - mcrypt
