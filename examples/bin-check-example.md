@@ -1,5 +1,5 @@
 ## Bin Check Example
-A Bin check is an operation that can return a card details form the first 6 digits of the card number.
+A Bin check is an operation that can return a card details from the first 6 digits of the card number.
 
 ```PHP
 use Flutterwave\Bin;
