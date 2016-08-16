@@ -33,7 +33,7 @@ class ApiRequest {
   */
   public function makePostRequest() {
     // $response = \Requests::post($this->url, $this->headers, json_encode($this->data));
-    $client = new Client(['timeout'  => 20]);
+    $client = new Client(['timeout'  => 60]);
     $response = $client->request('POST', $this->url, [
         'json' => $this->data,
         'headers' => [
