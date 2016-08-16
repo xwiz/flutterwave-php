@@ -69,8 +69,32 @@ $currency = Currencies::NAIRA; //currency to charge the card
 $authModel = AuthModel::BVN; can be BVN, NOAUTH, PIN, etc
 $narration = "narration for this transaction";
 $responseUrl = ""; //callback url
-Card::charge($card, $amount, $custId, $currency, $authModel, $narration, $responseUrl)
+$country = Countries::NIGERIA;
+Card::charge($card, $amount, $custId, $currency, $country, $authModel, $narration, $responseUrl)
 ```
+__List of supported countries and currencies for card charge__
++ NG: NIGERIA
+NGN
+USD
+GBP
+EURO
+
++ GH: GHANA
+GHS
+USD
+
++ US: UNITED STATES
+USD
+
++ KE: KENYA
+KES
+USD
+
++ UK: United Kingdom
+GBP
+USD
+EURO
+Hit us up to activate your desired location for you!
 
 #### Validate card
 This operation can be used to validate a card if an auth model of bvn or pin was chosen in the charge

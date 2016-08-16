@@ -64,7 +64,7 @@ class Card {
    * @param  string $responseUrl
    * @return ApiResponse
    */
-  public static function charge($card, $amount, $custId, $currency, $authModel, $narration, $responseUrl) {
+  public static function charge($card, $amount, $custId, $currency, $country, $authModel, $narration, $responseUrl) {
     FlutterValidator::validateClientCredentialsSet();
 
     $key = Flutterwave::getApiKey();
@@ -77,6 +77,7 @@ class Card {
     $cardNo = FlutterEncrypt::encrypt3Des($card['card_no'], $key);
     $expiryMonth = FlutterEncrypt::encrypt3Des($card['expiry_month'], $key);
     $expiryYear = FlutterEncrypt::encrypt3Des($card['expiry_year'], $key);
+    $country = FlutterEncrypt::encrypt3Des($country, $key);
     $cardType = "";
     if (isset($card['card_type']) && !empty($card['card_type'])) {
       $cardType = FlutterEncrypt::encrypt3Des($card['card_type'], $key);
@@ -96,6 +97,7 @@ class Card {
               ->addBody("cardno", $cardNo)
               ->addBody("cardtype", $cardType)
               ->addBody("cvv", $cvv)
+              ->addBody("country", $country)
               ->addBody("expiryyear", $expiryYear)
               ->addBody("expirymonth", $expiryMonth)
               ->makePostRequest();
