@@ -1,5 +1,6 @@
 <?php
 use Flutterwave\Banks;
+use GuzzleHttp\Client;
 
 class BanksTest extends PHPUnit_Framework_TestCase {
   public function testBanksList() {
