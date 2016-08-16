@@ -1,4 +1,6 @@
-## Card Example
+# Get Paid Card Examples
+
+## Card features
 This document explains how to use Flutterwave APIs for performing operations on cards.
 Supported cards include MasterCard, Visa, and Verve.
 - Tokenize card
