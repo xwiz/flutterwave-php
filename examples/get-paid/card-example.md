@@ -73,24 +73,24 @@ $country = Countries::NIGERIA;
 Card::charge($card, $amount, $custId, $currency, $country, $authModel, $narration, $responseUrl)
 ```
 __List of supported countries and currencies for card charge__
-+ NG: NIGERIA
++ NIGERIA -
 NGN
 USD
 GBP
 EURO
 
-+ GH: GHANA
++ GHANA -
 GHS
 USD
 
-+ US: UNITED STATES
++ UNITED STATES -
 USD
 
-+ KE: KENYA
++ KENYA -
 KES
 USD
 
-+ UK: United Kingdom
++ United Kingdom -
 GBP
 USD
 EURO
