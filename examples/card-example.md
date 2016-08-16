@@ -114,6 +114,9 @@ use Flutterwave\Card;
 use Flutterwave\Flutterwave;
 use Flutterwave\Currencies;
 
+$merchantKey = ""; //can be found on flutterwave dev portal
+$apiKey = ""; //can be found on flutterwave dev portal
+$env = "staging"; //this can be production when ready for deployment
 Flutterwave::setMerchantCredentials($merchantKey, $apiKey, $env);
 
 $authRef = ""; //in the preauthorize() call the response returns a reference, use it here
