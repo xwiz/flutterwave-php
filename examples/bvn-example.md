@@ -7,7 +7,7 @@ use Flutterwave\Flutterwave;
 
 //merchantKey and apiKey can be found in your flutter developer console
 //env can be production or staging depending on your stage of development
-Flutterwave::setClientCredentials($merchantKey, $apiKey, $env);
+Flutterwave::setMerchantCredentials($merchantKey, $apiKey, $env);
 
 $bvn = "76357363637";
 

@@ -6,7 +6,7 @@ use Flutterwave\Flutterwave;
 
 //merchantKey and apiKey can be found in your flutter developer console
 //env can be production or staging depending on your stage of development
-Flutterwave::setClientCredentials($merchantKey, $apiKey, $env);
+Flutterwave::setMerchantCredentials($merchantKey, $apiKey, $env);
 
 $ipAddress = "127.0.0.1";
 $result = Ip::check($ipAddress);

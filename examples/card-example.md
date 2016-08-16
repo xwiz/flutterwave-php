@@ -21,7 +21,7 @@ use Flutterwave\AuthModel;
 $merchantkey = "744hdhhg"; //merchant key on flutterwave dev portal
 $apiKey = "58jdjdjd"; //merchant api key on flutterwave dev portal
 $env = "staging"; //can be staging or production
-Flutterwave::setClientCredentials($merchantKey, $apiKey, $env);
+Flutterwave::setMerchantCredentials($merchantKey, $apiKey, $env);
 
 $card = [
   "card_no" => "",
@@ -53,7 +53,7 @@ use Flutterwave\Currencies;
 $merchantkey = "744hdhhg"; //merchant key on flutterwave dev portal
 $apiKey = "58jdjdjd"; //merchant api key on flutterwave dev portal
 $env = "staging"; //can be staging or production
-Flutterwave::setClientCredentials($merchantKey, $apiKey, $env);
+Flutterwave::setMerchantCredentials($merchantKey, $apiKey, $env);
 
 $card = [
   "card_no" => "",
@@ -95,7 +95,7 @@ use Flutterwave\AuthModel;
 $merchantkey = "744hdhhg"; //merchant key on flutterwave dev portal
 $apiKey = "58jdjdjd"; //merchant api key on flutterwave dev portal
 $env = "staging"; //can be staging or production
-Flutterwave::setClientCredentials($merchantKey, $apiKey, $env);
+Flutterwave::setMerchantCredentials($merchantKey, $apiKey, $env);
 
 //this operation will put an hold on the $amount
 //to perform this operation you need to have first tokenized the card
@@ -114,7 +114,7 @@ use Flutterwave\Card;
 use Flutterwave\Flutterwave;
 use Flutterwave\Currencies;
 
-Flutterwave::setClientCredentials($merchantKey, $apiKey, $env);
+Flutterwave::setMerchantCredentials($merchantKey, $apiKey, $env);
 
 $authRef = ""; //in the preauthorize() call the response returns a reference, use it here
 $transId = ""; //in the preauthorize() call the response returns a transaction id, use it here
@@ -134,7 +134,7 @@ use Flutterwave\Card;
 use Flutterwave\Flutterwave;
 use Flutterwave\Currencies;
 
-Flutterwave::setClientCredentials($merchantKey, $apiKey, $env);
+Flutterwave::setMerchantCredentials($merchantKey, $apiKey, $env);
 
 $authRef = ""; //in the preauthorize() call the response returns a reference, use it here
 $transId = ""; //in the preauthorize() call the response returns a transaction id, use it here

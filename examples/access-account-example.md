@@ -8,7 +8,7 @@ use Flutterwave\Flutterwave;
 
 //merchantKey and apiKey can be found in your flutter developer console
 //env can be production or staging depending on your stage of development
-Flutterwave::setClientCredentials($merchantKey, $apiKey, $env);
+Flutterwave::setMerchantCredentials($merchantKey, $apiKey, $env);
 
 $ref = "746464"; //any valid reference
 $debitAcc = "8744644"; //your account number to debit
