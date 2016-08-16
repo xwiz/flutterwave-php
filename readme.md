@@ -1,5 +1,6 @@
 # Flutterwave-PHP
-The Flutterwave PHP library allows you to write php code to consume Flutterwaves APIs
+The Flutterwave PHP library allows you to write php code to consume Flutterwaves APIs.
+You can sign up for a Flutterwave account at [https://flutterwave.com](https://flutterwave.com)
 
 ## Flutterwave Services
 - Account Payment
@@ -29,4 +30,4 @@ composer update
 ```
 
 ### Get Started
-To get started using Flutterwave-PHP visit [here](https://github.com/Flutterwave/flutterwave-php/tree/master/examples) to see code examples. 
+To get started using Flutterwave-PHP visit [here](https://github.com/Flutterwave/flutterwave-php/tree/master/examples) to see code examples.
