@@ -174,3 +174,23 @@ if ($result->isSuccessfulResponse()) {
   echo("Hurray!");
 }
 ```
+
+#### Void
+This operation can be used to void a preauthed amount on card.
+
+```PHP
+use Flutterwave\Card;
+use Flutterwave\Flutterwave;
+use Flutterwave\Currencies;
+
+Flutterwave::setMerchantCredentials($merchantKey, $apiKey, $env);
+
+$authRef = ""; //in the preauthorize() call the response returns a reference, use it here
+$transId = ""; //in the preauthorize() call the response returns a transaction id, use it here
+$amount = 1000; //amount to capture.
+$currency = Currencies::NAIRA;
+$result = Card::void($authRef, $transId, $amount, $currency);
+if ($result->isSuccessfulResponse()) {
+  echo("Hurray!");
+}
+```
