@@ -41,6 +41,12 @@ $result = Card::tokenize($card, $authModel, $validateOption, $bvn = "");
 if ($result->isSuccessfulResponse()) {
   echo("Card was successfully tokenized");
 }
+
+//Important note
+//when using VBVSECURECODE as the AuthModel you will need to decrypt responsehtml field in the response data
+//of a successful request
+//your key here is your apiKey from flutterwave dashboard
+$plain = FlutterEncrypt::decrypt3Des($responsehtml, $key);
 ```
 
 #### Charge card
@@ -70,7 +76,14 @@ $authModel = AuthModel::BVN; can be BVN, NOAUTH, PIN, etc
 $narration = "narration for this transaction";
 $responseUrl = ""; //callback url
 $country = Countries::NIGERIA;
-Card::charge($card, $amount, $custId, $currency, $country, $authModel, $narration, $responseUrl)
+$response = Card::charge($card, $amount, $custId, $currency, $country, $authModel, $narration, $responseUrl);
+
+//Important note
+//when using VBVSECURECODE as the AuthModel you will need to decrypt responsehtml field in the response data
+//of a successful request
+//your key here is your apiKey from flutterwave dashboard
+$plain = FlutterEncrypt::decrypt3Des($responsehtml, $key);
+
 ```
 __List of supported countries and currencies for card charge__
 + NIGERIA -
