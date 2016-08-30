@@ -5,6 +5,7 @@ countries.
 ```PHP
 use Flutterwave\Disbursement;
 use Flutterwave\Flutterwave;
+use Flutterwave\Banks;
 use Flutterwave\Countries;
 use Flutterwave\Currencies;
 
@@ -20,7 +21,7 @@ $amount = 10000; //amount to send
 $sender = "Ridwan Olalere"; name of the sender
 $banks = Banks::allBanks(); // this will return all banks with bank codes
 $destination = array(
-  "bankCode" => $banks['GTBank'],
+  "bankCode" => $banks['058'], //the 058 represents the bank code
   "recipientAccount" => "0983736454",
   "recipientName" => "Ayo Ayo",
   "country" => Countries::NIGERIA,

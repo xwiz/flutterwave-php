@@ -40,7 +40,7 @@ class ApiRequest {
           'Content-Type' => 'application/json'
         ]
     ]);
-    Logging::getLoggerInstance()->info("response:".$response->getBody());
+    // Logging::getLoggerInstance()->info("response:".$response->getBody());
     return ApiResponse::parseResponse($response);
   }
 }
