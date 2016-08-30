@@ -19,7 +19,13 @@ Flutterwave::setMerchantCredentials($merchantKey, $apiKey, $env);
 $uniqueRef = "73646474"; //any unique reference you want to use
 $amount = 10000; //amount to send
 $sender = "Ridwan Olalere"; name of the sender
-$banks = Banks::allBanks(); // this will return all banks with bank codes
+$result = Banks::allBanks(); // this will return all banks with bank codes
+$banks = array();
+if ($result->isSuccessful()) {
+  $response = $result->getResponseData();
+  $banks = $response["data"]["058"]; //the 058 represents the response data
+}
+
 $destination = array(
   "bankCode" => $banks['058'], //the 058 represents the bank code
   "recipientAccount" => "0983736454",
