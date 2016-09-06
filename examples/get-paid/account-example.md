@@ -19,27 +19,29 @@ $env = "staging"; //this can be production when ready for deployment
 Flutterwave::setMerchantCredentials($merchantKey, $apiKey, $env);
 
 $accountNumber = ""; //account number you want to charge
-$resp = Account::initiate($accountNumber);
-if ($resp->isSuccessfulResponse()) {
+$result = Account::initiate($accountNumber);
+if ($result->isSuccessfulResponse()) {
   echo("Works");
 }
 
+$resp = $result->getResponseData();
 $ref = $resp['data']['transactionReference'];
 $otp = ""; //sent to account owners number
 $billingAmount = 1000;
 $narration = "payment for forLoop";
-$resp2 = Account::validate($ref, $accountNumber, $otp, $billingAmount, $narration);
+$result2 = Account::validate($ref, $accountNumber, $otp, $billingAmount, $narration);
 
-if ($resp2->isSuccessful()) {
+if ($result2->isSuccessfulResponse()) {
   echo("Successfully validated");
 }
 
 //this method will charge an account after validating the account
+$resp2 = $result2->getResponseData();
 $token = $resp2['data']['accountToken'];
 $narration = "payment for forLoop";
-$resp3 = Account::charge($token, $amount, $narration);
+$result3 = Account::charge($token, $amount, $narration);
 
-if ($resp3->isSuccessfulResponse()) {
+if ($result3->isSuccessfulResponse()) {
   echo("We have successfully charged this account for you");
 }
 
