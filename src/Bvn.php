@@ -31,7 +31,6 @@ class Bvn {
     FlutterValidator::validateClientCredentialsSet();
     $resource = self::$bvnResources[Flutterwave::getEnv()]["verify"];
     $encryptedOtpOption = FlutterEncrypt::encrypt3Des($otpOption, Flutterwave::getApiKey());
-    echo($encryptedOtpOption);
     $resp = (new ApiRequest($resource))
               ->addBody("merchantid", Flutterwave::getMerchantKey())
               ->addBody("otpoption", $encryptedOtpOption)
