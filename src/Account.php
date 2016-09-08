@@ -81,7 +81,7 @@ class Account {
     $key = Flutterwave::getApiKey();
     $token = FlutterEncrypt::encrypt3Des($token, $key);
     $amount = FlutterEncrypt::encrypt3Des($amount, $key);
-    $narration = FlutterEncrypt::encrypt3Des($data, $key);
+    $narration = FlutterEncrypt::encrypt3Des($narration, $key);
 
     $resource = self::$accountResources[Flutterwave::getEnv()]["charge"];
     $resp = (new ApiRequest($resource))
