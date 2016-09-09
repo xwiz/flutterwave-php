@@ -87,6 +87,14 @@ class Card {
     if (isset($card['card_type']) && !empty($card['card_type'])) {
       $cardType = FlutterEncrypt::encrypt3Des($card['card_type'], $key);
     }
+    $pin = "";
+    if(isset($card['pin']) && !empty($card['pin'])){
+      $pin = FlutterEncrypt::encrypt3Des($card['pin'], $key);
+    }
+    $bvn = "";
+    if(isset($card['bvn']) && !empty($card['bvn'])){
+      $bvn = FlutterEncrypt::encrypt3Des($card['bvn'], $key);
+    }
     $cvv = FlutterEncrypt::encrypt3Des($card['cvv'], $key);
     $merchantKey = Flutterwave::getMerchantKey();
 
@@ -105,6 +113,8 @@ class Card {
               ->addBody("country", $country)
               ->addBody("expiryyear", $expiryYear)
               ->addBody("expirymonth", $expiryMonth)
+              ->addBody("pin", $pin)
+              ->addBody("bvn", $bvn)
               ->makePostRequest();
     return $resp;
   }
