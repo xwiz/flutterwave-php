@@ -11,7 +11,8 @@ class Card {
       'validate' => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/pay/validate/",
       "preauth" => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/preauthorize/",
       "capture" => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/capture/",
-      "refund" => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/refund/"
+      "refund" => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/refund/",
+      "status" => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/status"
     ],
     "production" => [
       'tokenize' => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/tokenize/",
@@ -19,7 +20,8 @@ class Card {
       'validate' => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/pay/validate/",
       "preauth" => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/preauthorize/",
       "capture" => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/capture/",
-      "refund" => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/refund/"
+      "refund" => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/refund/",
+      "status" => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/status"
     ]
   ];
 
@@ -69,7 +71,7 @@ class Card {
    * @param  string $responseUrl
    * @return ApiResponse
    */
-  public static function charge($card, $amount, $custId, $currency, $country, $authModel, $narration, $responseUrl) {
+  public static function charge($card, $amount, $custId, $currency, $country, $authModel, $narration, $responseUrl = "") {
     FlutterValidator::validateClientCredentialsSet();
 
     $key = Flutterwave::getApiKey();
@@ -86,6 +88,14 @@ class Card {
     $cardType = "";
     if (isset($card['card_type']) && !empty($card['card_type'])) {
       $cardType = FlutterEncrypt::encrypt3Des($card['card_type'], $key);
+    }
+    $pin = "";
+    if(isset($card['pin']) && !empty($card['pin'])){
+      $pin = FlutterEncrypt::encrypt3Des($card['pin'], $key);
+    }
+    $bvn = "";
+    if(isset($card['bvn']) && !empty($card['bvn'])){
+      $bvn = FlutterEncrypt::encrypt3Des($card['bvn'], $key);
     }
     $cvv = FlutterEncrypt::encrypt3Des($card['cvv'], $key);
     $merchantKey = Flutterwave::getMerchantKey();
@@ -105,6 +115,8 @@ class Card {
               ->addBody("country", $country)
               ->addBody("expiryyear", $expiryYear)
               ->addBody("expirymonth", $expiryMonth)
+              ->addBody("pin", $pin)
+              ->addBody("bvn", $bvn)
               ->makePostRequest();
     return $resp;
   }
@@ -244,6 +256,22 @@ class Card {
               ->addBody("trxauthorizeid", $transId)
               ->addBody("amount", $amount)
               ->addBody("currency", $currency)
+              ->makePostRequest();
+    return $resp;
+  }
+
+  /**
+   * use this method to check the status of a transaction
+   * @param  string $ref  transaction reference
+   * @return ApiResponse
+   */
+  public static function checkStatus($ref) {
+    $key = Flutterwave::getApiKey();
+    $ref = FlutterEncrypt::encrypt3Des($ref, $key);
+    $resource = self::$resources[Flutterwave::getEnv()]["status"];
+    $resp = (new ApiRequest($resource))
+              ->addBody("trxreference", $ref)
+              ->addBody("merchantid", Flutterwave::getMerchantKey())
               ->makePostRequest();
     return $resp;
   }
