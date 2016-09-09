@@ -6,7 +6,7 @@ class Bin {
   //@var array respresents both staging and production server url
   private static $url = [
     "staging" => "http://staging1flutterwave.co:8080/pwc/rest/fw/check/",
-    "production" => ""
+    "production" => "https://prod1flutterwave.co:8181/pwc/rest/fw/check/"
   ];
 
   /**

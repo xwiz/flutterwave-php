@@ -12,7 +12,7 @@ class Banks {
    */
   private static $resources = [
     "staging" => "http://staging1flutterwave.co:8080/pwc/rest/fw/banks/",
-    "production" => ""
+    "production" => "https://prod1flutterwave.co:8181/pwc/rest/fw/banks/"
   ];
 
   /**

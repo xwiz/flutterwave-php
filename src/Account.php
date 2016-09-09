@@ -11,11 +11,15 @@ class Account {
    */
   private static $accountResources = [
     "staging" => [
-      "initiate" => "http://staging1flutterwave.co:8080/pwc/rest/recurrent/account",
-      "validate" => "http://staging1flutterwave.co:8080/pwc/rest/recurrent/account/validate",
-      "charge" => "http://staging1flutterwave.co:8080/pwc/rest/recurrent/account/charge"
+      "initiate" => "http://staging1flutterwave.co:8080/pwc/rest/recurrent/account/",
+      "validate" => "http://staging1flutterwave.co:8080/pwc/rest/recurrent/account/validate/",
+      "charge" => "http://staging1flutterwave.co:8080/pwc/rest/recurrent/account/charge/"
     ],
-    "production" => ""
+    "production" => [
+      "initiate" => "https://prod1flutterwave.co:8181/pwc/rest/recurrent/account/",
+      "validate" => "https://prod1flutterwave.co:8181/pwc/rest/recurrent/account/validate/",
+      "charge" => "https://prod1flutterwave.co:8181/pwc/rest/recurrent/account/charge/"
+    ]
   ];
 
   /**

@@ -6,15 +6,20 @@ use Flutterwave\FlutterValidator;
 class Card {
   private static $resources = [
     "staging" => [
-      'tokenize' => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/tokenize",
-      'charge' => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/pay",
-      'validate' => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/pay/validate",
-      "preauth" => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/preauthorize",
-      "capture" => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/capture",
-      "refund" => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/refund"
+      'tokenize' => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/tokenize/",
+      'charge' => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/pay/",
+      'validate' => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/pay/validate/",
+      "preauth" => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/preauthorize/",
+      "capture" => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/capture/",
+      "refund" => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/refund/"
     ],
     "production" => [
-
+      'tokenize' => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/tokenize/",
+      'charge' => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/pay/",
+      'validate' => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/pay/validate/",
+      "preauth" => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/preauthorize/",
+      "capture" => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/capture/",
+      "refund" => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/refund/"
     ]
   ];
 

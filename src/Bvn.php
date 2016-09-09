@@ -16,7 +16,9 @@ class Bvn {
       "resendOtp" => "http://staging1flutterwave.co:8080/pwc/rest/bvn/resendotp/"
     ],
     "production" => [
-
+      "verify" => "https://prod1flutterwave.co:8181/pwc/rest/bvn/verify/",
+      "validate" => "https://prod1flutterwave.co:8181/pwc/rest/bvn/validate/",
+      "resendOtp" => "https://prod1flutterwave.co:8181/pwc/rest/bvn/resendotp/"
     ]
   ];
 
