@@ -69,7 +69,7 @@ class Card {
    * @param  string $responseUrl
    * @return ApiResponse
    */
-  public static function charge($card, $amount, $custId, $currency, $country, $authModel, $narration, $responseUrl) {
+  public static function charge($card, $amount, $custId, $currency, $country, $authModel, $narration, $responseUrl = "") {
     FlutterValidator::validateClientCredentialsSet();
 
     $key = Flutterwave::getApiKey();
