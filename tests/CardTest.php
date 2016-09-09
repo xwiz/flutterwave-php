@@ -3,6 +3,7 @@ use Flutterwave\Card;
 use Flutterwave\Flutterwave;
 use Flutterwave\AuthModel;
 use Flutterwave\Currencies;
+use Flutterwave\Countries;
 
 class CardTest extends PHPUnit_Framework_TestCase {
   public function setUp() {
@@ -29,7 +30,7 @@ class CardTest extends PHPUnit_Framework_TestCase {
       "expiry_month" => "01",
       "expiry_year" => "19"
     ];
-    $resp = Card::charge($card, 1000, "1202", Currencies::NAIRA, AuthModel::NOAUTH, "test", "");
+    $resp = Card::charge($card, 1000, "1202", Currencies::NAIRA, Countries::NIGERIA, AuthModel::NOAUTH, "test", "");
     $this->assertTrue($resp->isSuccessfulResponse());
   }
 

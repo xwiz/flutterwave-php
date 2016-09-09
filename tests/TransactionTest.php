@@ -4,6 +4,7 @@ use Flutterwave\Flutterwave;
 use Flutterwave\Transaction;
 use Flutterwave\Card;
 use Flutterwave\Currencies;
+use Flutterwave\Countries;
 use Flutterwave\AuthModel;
 
 class TransactionTest extends PHPUnit_Framework_TestCase {
@@ -20,10 +21,9 @@ class TransactionTest extends PHPUnit_Framework_TestCase {
       "expiry_month" => "08",
       "expiry_year" => "18"
     ];
-    $resp = Card::charge($card, 1000, uniqid(), Currencies::NAIRA, "PIN", "test", "");
+    $resp = Card::charge($card, 1000, uniqid(), Currencies::NAIRA, Countries::NIGERIA, AuthModel::NOAUTH, "test");
     $data = $resp->getResponseData();
-    print_r($data);
-    return $data['transactionreference'];
+    return $data['data']['transactionreference'];
   }
 
   /**
@@ -31,12 +31,13 @@ class TransactionTest extends PHPUnit_Framework_TestCase {
    * @depends testEmpty
    */
   public function testTransactionStatus($ref) {
+    echo("hehhe".$ref);
     $resp = Transaction::status($ref);
     $data = $resp->getResponseData();
-
-    $this->assertTrue($resp->isSuccessResponse());
+    print_r($data);
+    $this->assertEquals("success", $data['status']);
     $this->assertTrue(!empty($data));
-    $this->$this->assertEquals("00", $data['responsecode']);
-    $this->$this->assertEquals($transactionReference, $data['transactionreference']);
+    $this->assertEquals("2", $data['data']['responsecode']);
+    $this->assertEquals($ref, $data['data']['transactionIdentifier']);
   }
 }
