@@ -52,7 +52,7 @@ if ($result3->isSuccessfulResponse()) {
   echo("I have passed second validation test.");
 }
 
-//If Validation step 2 is successful and account token is returned, you save the account token
+//If Validation step 2 is successful, an account token is returned, you save the account token
 //You will need the account token each time you want to disburse funds
 $accountToken = $response3['data']['accounttoken'];
 $amount = 1000;
@@ -73,7 +73,7 @@ if ($result4->isSuccessfulResponse()) {
   echo("I have successfully disbursed funds.");
 }
 
-//You can see a list of all your linked account as well
+//You can see a list of all your linked accounts as well
 result5 = Disbursement::getLinkedAccounts();
 $response5 = $resp->getResponseData();
 
