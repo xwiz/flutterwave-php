@@ -17,7 +17,7 @@ Flutterwave::setMerchantCredentials($merchantKey, $apiKey, $env);
 
 //In order to disburse funds, you need to first link the account you will disburse from
 //You can link as many accounts as you want
-$accountno = "0690000028";
+$accountno = "0690000031";
 $result = Disbursement::link($accountno);
 //$result is an instance of ApiResponse class which has
 //methods like getResponseData(), getStatusCode(), getResponseCode(), isSuccessfulResponse()
