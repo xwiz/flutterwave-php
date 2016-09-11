@@ -46,7 +46,7 @@ if ($result2->isSuccessfulResponse()) {
 $otp = "12345";
 $otpType = "PHONE_OTP"; //(ACCOUNT_DEBIT | PHONE_OTP)
 $result3 = Disbursement::validate($otp, $linkingRef, $otpType);
-$response3 = $result2->getResponseData();
+$response3 = $result3->getResponseData();
 
 if ($result3->isSuccessfulResponse()) {
   echo("I have passed second validation test.");
@@ -67,7 +67,7 @@ $destination = [
 ];
 $narration = "Testing";
 $result4 = Disbursement::send($accountToken, $uniqueRef, $amount, $narration, $senderName, $destination);
-$response4 = $resp->getResponseData();
+$response4 = $result4->getResponseData();
 
 if ($result4->isSuccessfulResponse()) {
   echo("I have successfully disbursed funds.");
@@ -75,9 +75,9 @@ if ($result4->isSuccessfulResponse()) {
 
 //You can see a list of all your linked accounts as well
 result5 = Disbursement::getLinkedAccounts();
-$response5 = $resp->getResponseData();
+$response5 = $result5->getResponseData();
 
-if ($result->isSuccessfulResponse()) {
+if ($result5->isSuccessfulResponse()) {
   echo("I can see a list of all linked accounts.");
 }
 
