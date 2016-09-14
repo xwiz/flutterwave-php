@@ -53,9 +53,10 @@ class Disbursement {
   public static function validate($otp, $relatedreference, $otptype) {
     FlutterValidator::validateClientCredentialsSet();
     
-    $encryptedOtp = FlutterEncrypt::encrypt3Des($otp, Flutterwave::getApiKey());
-    $encryptedRelatedReference = FlutterEncrypt::encrypt3Des($relatedreference, Flutterwave::getApiKey());
-    $encryptedOtpType = FlutterEncrypt::encrypt3Des($otptype, Flutterwave::getApiKey());
+    $key = Flutterwave::getApiKey();
+    $encryptedOtp = FlutterEncrypt::encrypt3Des($otp, $key);
+    $encryptedRelatedReference = FlutterEncrypt::encrypt3Des($relatedreference, $key);
+    $encryptedOtpType = FlutterEncrypt::encrypt3Des($otptype, $key);
 
     $resource = self::$disburseResources[Flutterwave::getEnv()]["validate"];
     $resp = (new ApiRequest($resource))
@@ -98,16 +99,17 @@ class Disbursement {
   public static function send($accountToken, $uniqueRef, $amount, $narration, $senderName, $destination) {
     FlutterValidator::validateClientCredentialsSet();
     //TODO: validate keys of destination is correct
-    $encryptedAccountToken = FlutterEncrypt::encrypt3Des($accountToken, Flutterwave::getApiKey());
-    $encryptedAmount = FlutterEncrypt::encrypt3Des($amount, Flutterwave::getApiKey());
-    $encryptedRef = FlutterEncrypt::encrypt3Des($uniqueRef, Flutterwave::getApiKey());
-    $encryptedBank = FlutterEncrypt::encrypt3Des($destination["bankCode"], Flutterwave::getApiKey());
-    $encryptedNarration = FlutterEncrypt::encrypt3Des($narration, Flutterwave::getApiKey());
-    $encryptedRecipientAccount = FlutterEncrypt::encrypt3Des($destination["recipientAccount"], Flutterwave::getApiKey());
-    $encryptedRecipientName = FlutterEncrypt::encrypt3Des($destination["recipientName"], Flutterwave::getApiKey());
-    $encryptedSender = FlutterEncrypt::encrypt3Des($senderName, Flutterwave::getApiKey());
-    $encryptedcountry = FlutterEncrypt::encrypt3Des($destination["country"], Flutterwave::getApiKey());
-    $encryptedcurrency = FlutterEncrypt::encrypt3Des($destination["currency"], Flutterwave::getApiKey());
+    $key = Flutterwave::getApiKey();
+    $encryptedAccountToken = FlutterEncrypt::encrypt3Des($accountToken, $key);
+    $encryptedAmount = FlutterEncrypt::encrypt3Des($amount, $key);
+    $encryptedRef = FlutterEncrypt::encrypt3Des($uniqueRef, $key);
+    $encryptedBank = FlutterEncrypt::encrypt3Des($destination["bankCode"], $key);
+    $encryptedNarration = FlutterEncrypt::encrypt3Des($narration, $key);
+    $encryptedRecipientAccount = FlutterEncrypt::encrypt3Des($destination["recipientAccount"], $key);
+    $encryptedRecipientName = FlutterEncrypt::encrypt3Des($destination["recipientName"], $key);
+    $encryptedSender = FlutterEncrypt::encrypt3Des($senderName, $key);
+    $encryptedcountry = FlutterEncrypt::encrypt3Des($destination["country"], $key);
+    $encryptedcurrency = FlutterEncrypt::encrypt3Des($destination["currency"], $key);
 
     $resource = self::$disburseResources[Flutterwave::getEnv()]["send"];
     $resp = (new ApiRequest($resource))
