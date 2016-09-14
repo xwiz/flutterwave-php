@@ -47,7 +47,7 @@ class AchTest extends PHPUnit_Framework_TestCase {
       "accountid": "",
       "custid": "798809090",
       "narration": "Testing ACH Payment",
-      "trxreference": "121313Ghjjhkjk",
+      "trxRef": "121313Ghjjhkjk",
       "amount": "1000.00",
       "currency": "NGN"
     ];
