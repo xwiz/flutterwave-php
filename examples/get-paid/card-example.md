@@ -19,6 +19,8 @@ into a safe string token that can be used to charge the card at a later date.
 use Flutterwave\Card;
 use Flutterwave\Flutterwave;
 use Flutterwave\AuthModel;
+use Flutterwave\Countries;
+use Flutterwave\FlutterEncrypt;
 
 $merchantkey = "744hdhhg"; //merchant key on flutterwave dev portal
 $apiKey = "58jdjdjd"; //merchant api key on flutterwave dev portal
@@ -33,7 +35,7 @@ $card = [
 ];
 
 $authModel = AuthModel::BVN; //this tells flutterwave how to validate the user of the card is the card owner
-//you can also use AuthModel::NOAUTH which does not need validate method call
+//you can also use AuthModel::NOAUTH //which does not need validate method call
 $validateOption = Flutterwave::SMS; //this tells flutterwave to send authentication otp via sms
 $bvn = ""; //represents the bvn number of the card owner/user
 $result = Card::tokenize($card, $authModel, $validateOption, $bvn = "");
@@ -57,6 +59,8 @@ use Flutterwave\Card;
 use Flutterwave\Flutterwave;
 use Flutterwave\AuthModel;
 use Flutterwave\Currencies;
+use Flutterwave\Countries;
+use Flutterwave\FlutterEncrypt;
 
 $merchantkey = "744hdhhg"; //merchant key on flutterwave dev portal
 $apiKey = "58jdjdjd"; //merchant api key on flutterwave dev portal
@@ -72,7 +76,7 @@ $card = [
 ];
 $custId = "76464"; your users customer id
 $currency = Currencies::NAIRA; //currency to charge the card
-$authModel = AuthModel::BVN; can be BVN, NOAUTH, PIN, etc
+$authModel = AuthModel::BVN; //can be BVN, NOAUTH, PIN, etc
 $narration = "narration for this transaction";
 $responseUrl = ""; //callback url
 $country = Countries::NIGERIA;
@@ -130,6 +134,8 @@ This operation allows you to put a hold of an amount on a certain card without c
 use Flutterwave\Card;
 use Flutterwave\Flutterwave;
 use Flutterwave\AuthModel;
+use Flutterwave\Countries;
+use Flutterwave\FlutterEncrypt;
 
 $merchantkey = "744hdhhg"; //merchant key on flutterwave dev portal
 $apiKey = "58jdjdjd"; //merchant api key on flutterwave dev portal
@@ -152,6 +158,8 @@ This operation can be used to charge a card of an amount that was previously pre
 use Flutterwave\Card;
 use Flutterwave\Flutterwave;
 use Flutterwave\Currencies;
+use Flutterwave\Countries;
+use Flutterwave\FlutterEncrypt;
 
 $merchantKey = ""; //can be found on flutterwave dev portal
 $apiKey = ""; //can be found on flutterwave dev portal
@@ -175,6 +183,8 @@ This operation can be used to refund a preauthed amount.
 use Flutterwave\Card;
 use Flutterwave\Flutterwave;
 use Flutterwave\Currencies;
+use Flutterwave\Countries;
+use Flutterwave\FlutterEncrypt;
 
 Flutterwave::setMerchantCredentials($merchantKey, $apiKey, $env);
 
@@ -195,6 +205,8 @@ This operation can be used to void a preauthed amount on card.
 use Flutterwave\Card;
 use Flutterwave\Flutterwave;
 use Flutterwave\Currencies;
+use Flutterwave\Countries;
+use Flutterwave\FlutterEncrypt;
 
 Flutterwave::setMerchantCredentials($merchantKey, $apiKey, $env);
 
