@@ -1,7 +1,6 @@
 <?php
 
 use Flutterwave\Flutterwave;
-use Flutterwave\Transaction;
 use Flutterwave\Card;
 use Flutterwave\Currencies;
 use Flutterwave\Countries;
@@ -32,7 +31,7 @@ class TransactionTest extends PHPUnit_Framework_TestCase {
    */
   public function testTransactionStatus($ref) {
     echo("hehhe".$ref);
-    $resp = Transaction::status($ref);
+    $resp = Card::checkStatus($ref);
     $data = $resp->getResponseData();
     print_r($data);
     $this->assertEquals("success", $data['status']);

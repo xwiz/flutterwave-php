@@ -207,3 +207,10 @@ if ($result->isSuccessfulResponse()) {
   echo("Hurray!");
 }
 ```
+
+#### checkStatus
+This operation will allow you to query your card transaction and check for its status
+```PHP
+$ref = ""; //the reference of the card transaction
+$result = Card::checkStatus($ref);
+```

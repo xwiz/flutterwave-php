@@ -11,7 +11,8 @@ class Card {
       'validate' => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/pay/validate/",
       "preauth" => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/preauthorize/",
       "capture" => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/capture/",
-      "refund" => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/refund/"
+      "refund" => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/refund/",
+      "status" => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/status"
     ],
     "production" => [
       'tokenize' => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/tokenize/",
@@ -19,7 +20,8 @@ class Card {
       'validate' => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/pay/validate/",
       "preauth" => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/preauthorize/",
       "capture" => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/capture/",
-      "refund" => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/refund/"
+      "refund" => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/refund/",
+      "status" => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/status"
     ]
   ];
 
@@ -254,6 +256,22 @@ class Card {
               ->addBody("trxauthorizeid", $transId)
               ->addBody("amount", $amount)
               ->addBody("currency", $currency)
+              ->makePostRequest();
+    return $resp;
+  }
+
+  /**
+   * use this method to check the status of a transaction
+   * @param  string $ref  transaction reference
+   * @return ApiResponse
+   */
+  public static function checkStatus($ref) {
+    $key = Flutterwave::getApiKey();
+    $ref = FlutterEncrypt::encrypt3Des($ref, $key);
+    $resource = self::$resources[Flutterwave::getEnv()]["status"];
+    $resp = (new ApiRequest($resource))
+              ->addBody("trxreference", $ref)
+              ->addBody("merchantid", Flutterwave::getMerchantKey())
               ->makePostRequest();
     return $resp;
   }
