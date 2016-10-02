@@ -46,7 +46,7 @@ class Ach {
   public static function getInstitutionById($institutionId) {
     FlutterValidator::validateClientCredentialsSet();
 
-    $encryptedInstitutionId = FlutterEncrypt::encrypt3Des($institutionId, Flutterwave::getApiKey(););
+    $encryptedInstitutionId = FlutterEncrypt::encrypt3Des($institutionId, Flutterwave::getApiKey());
 
     $resource = self::$achResources[Flutterwave::getEnv()]["getInstitutionById"];
     $resp = (new ApiRequest($resource))

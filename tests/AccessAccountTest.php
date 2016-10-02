@@ -9,7 +9,7 @@ class AccessAccountTest extends PHPUnit_Framework_TestCase {
 
   public function testInitiate() {
     $accountNumber = "0690000001";
-    $resp = Account::initiate($accountNumber);
+    $resp = AccessAccount::initiate($accountNumber);
     $this->assertTrue($resp->isSuccessfulResponse());
   }
 
@@ -20,7 +20,7 @@ class AccessAccountTest extends PHPUnit_Framework_TestCase {
     $billingAmount = 1000;
     $narration = "testing";
 
-    $resp = Account::validate($ref, $accountNum, $otp, $billingAmount, $narration);
+    $resp = AccessAccount::validate($ref, $accountNum, $otp, $billingAmount, $narration);
     $this->assertTrue($resp->isSuccessfulResponse());
   }
 
