@@ -1,5 +1,5 @@
 <?php
-use Flutterwave\Account;
+use Flutterwave\AccessAccount;
 use Flutterwave\Flutterwave;
 
 class AccessAccountTest extends PHPUnit_Framework_TestCase {
