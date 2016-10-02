@@ -150,41 +150,45 @@ class Card {
     return $resp;
   }
 
-  /**
-   * preAuthorize is used to hold certain amount from a card without actually
-   * charging the card
-   * @param  string $token    token from tokenize response data
-   * @param  int|double|float $amount   amount to preauth
-   * @param  string $currency currency to use for preauth
-   * @return ApiResponse
-   */
-  public static function preAuthorize($token, $amount, $currency) {
+    /**
+     * preAuthorize is used to hold certain amount from a card without actually
+     * charging the card
+     * @param  string $token token from tokenize response data
+     * @param  int|double|float $amount amount to preauth
+     * @param  string $currency currency to use for preauth
+     * @param string $country country to use for preauth
+     * @return ApiResponse
+     */
+  public static function preAuthorize($token, $amount, $currency, $country = 'NG') {
     FlutterValidator::validateClientCredentialsSet();
 
     $key = Flutterwave::getApiKey();
     $token = FlutterEncrypt::encrypt3Des($token, $key);
     $amount = FlutterEncrypt::encrypt3Des($amount, $key);
     $currency = FlutterEncrypt::encrypt3Des($currency, $key);
+    $country = FlutterEncrypt::encrypt3Des($country, $key);
 
     $resource = self::$resources[Flutterwave::getEnv()]['preauth'];
     $resp = (new ApiRequest($resource))
               ->addbody("merchantid", Flutterwave::getMerchantKey())
               ->addBody("amount", $amount)
               ->addBody("currency", $currency)
+              ->addBody("country", $country)
               ->addBody("chargetoken", $token)
               ->makePostRequest();
     return $resp;
   }
 
-  /**
-   * this can be used to charge the amount that was preAuthorized
-   * @param  string $authRef  transaction reference from
-   * @param  string $transId  transaction authorization id from preauthorize
-   * @param  int|double|float $amount   amount to put on hold
-   * @param  string $currency currency
-   * @return ApiResponse
-   */
-  public static function capture($authRef, $transId, $amount, $currency) {
+    /**
+     * this can be used to charge the amount that was preAuthorized
+     * @param  string $authRef transaction reference from
+     * @param  string $transId transaction authorization id from preauthorize
+     * @param  int|double|float $amount amount to put on hold
+     * @param  string $currency currency
+     * @param string $country country
+     * @return ApiResponse
+     */
+  public static function capture($authRef, $transId, $amount, $currency, $country = 'NG') {
     FlutterValidator::validateClientCredentialsSet();
 
     $key = Flutterwave::getApiKey();
@@ -192,6 +196,7 @@ class Card {
     $transId = FlutterEncrypt::encrypt3Des($transId, $key);
     $currency = FlutterEncrypt::encrypt3Des($currency, $key);
     $amount = FlutterEncrypt::encrypt3Des($amount, $key);
+    $country = FlutterEncrypt::encrypt3Des($country, $key);
 
     $resource = self::$resources[Flutterwave::getEnv()]['capture'];
     $resp = (new ApiRequest($resource))
@@ -200,6 +205,7 @@ class Card {
               ->addBody("trxauthorizeid", $transId)
               ->addBody("amount", $amount)
               ->addBody("currency", $currency)
+              ->addBody("country", $country)
               ->makePostRequest();
     return $resp;
   }
@@ -210,9 +216,10 @@ class Card {
    * @param  string $transId  transaction id
    * @param  [type] $amount   amount to release from hold
    * @param  [type] $currency currency
+   * @param  string $country country
    * @return ApiResponse
    */
-  public static function refund($authRef, $transId, $amount, $currency) {
+  public static function refund($authRef, $transId, $amount, $currency, $country = 'NG') {
     FlutterValidator::validateClientCredentialsSet();
 
     $key = Flutterwave::getApiKey();
@@ -220,6 +227,7 @@ class Card {
     $transId = FlutterEncrypt::encrypt3Des($transId, $key);
     $currency = FlutterEncrypt::encrypt3Des($currency, $key);
     $amount = FlutterEncrypt::encrypt3Des($amount, $key);
+    $country = FlutterEncrypt::encrypt3Des($country, $key);
 
     $resource = self::$resources[Flutterwave::getEnv()]['refund'];
     $resp = (new ApiRequest($resource))
@@ -228,6 +236,7 @@ class Card {
               ->addBody("trxauthorizeid", $transId)
               ->addBody("amount", $amount)
               ->addBody("currency", $currency)
+              ->addBody("country", $country)
               ->makePostRequest();
     return $resp;
   }
@@ -238,9 +247,10 @@ class Card {
    * @param  string $transId  transaction id
    * @param  [type] $amount   amount to release from hold
    * @param  [type] $currency currency
+   * @param  string $country country
    * @return ApiResponse
    */
-  public static function void($authRef, $transId, $amount, $currency) {
+  public static function void($authRef, $transId, $amount, $currency, $country = 'NG') {
     FlutterValidator::validateClientCredentialsSet();
 
     $key = Flutterwave::getApiKey();
@@ -248,6 +258,7 @@ class Card {
     $transId = FlutterEncrypt::encrypt3Des($transId, $key);
     $currency = FlutterEncrypt::encrypt3Des($currency, $key);
     $amount = FlutterEncrypt::encrypt3Des($amount, $key);
+    $country = FlutterEncrypt::encrypt3Des($country, $key);
 
     $resource = self::$resources[Flutterwave::getEnv()]['refund'];
     $resp = (new ApiRequest($resource))
@@ -256,6 +267,7 @@ class Card {
               ->addBody("trxauthorizeid", $transId)
               ->addBody("amount", $amount)
               ->addBody("currency", $currency)
+              ->addBody("country", $country)
               ->makePostRequest();
     return $resp;
   }
