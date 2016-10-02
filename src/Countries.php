@@ -16,4 +16,6 @@ class Countries {
   const KENYA = "KE";
 
   const UNITED_KINGDOM = "UK";
+
+  const UNITED_STATES = "US";
 }
