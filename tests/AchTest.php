@@ -29,11 +29,11 @@ class AchTest extends PHPUnit_Framework_TestCase {
   */
   public function testAddUser($type) {
     $user = [
-      "username": "gondy",
-      "password": "password",
-      "pin": "1111",
-      "email":"email@domain.com",
-      "institution": $type
+      "username" => "gondy",
+      "password" => "password",
+      "pin" => "1111",
+      "email" =>"email@domain.com",
+      "institution" => $type
     ];
     $resp = Ach::addUser($user);
     $this->assertTrue($resp->isSuccessfulResponse());
@@ -43,13 +43,13 @@ class AchTest extends PHPUnit_Framework_TestCase {
 
   public function testChargeEach() {
     $request = [
-      "publictoken": "",
-      "accountid": "",
-      "custid": "798809090",
-      "narration": "Testing ACH Payment",
-      "trxRef": "121313Ghjjhkjk",
-      "amount": "1000.00",
-      "currency": "NGN"
+      "publictoken" => "",
+      "accountid" => "",
+      "custid" => "798809090",
+      "narration" => "Testing ACH Payment",
+      "trxRef" => "121313Ghjjhkjk",
+      "amount" => "1000.00",
+      "currency" => "NGN"
     ];
     $resp = Ach::chargeEach($request);
     $this->assertTrue($resp->isSuccessfulResponse());
