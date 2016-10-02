@@ -19,7 +19,7 @@ class CardTest extends PHPUnit_Framework_TestCase {
     ];
 
     $resp = Card::tokenize($card, AuthModel::BVN, Flutterwave::SMS, "22254824829");
-    Card::tokenize($card, $authModel, $validateOption [, $bvn])
+    // Card::tokenize($card, $authModel, $validateOption);
     $this->assertTrue($resp->isSuccessfulResponse());
   }
 

@@ -53,8 +53,8 @@ class DisbursementTest extends PHPUnit_Framework_TestCase {
     $destination = [
       "country" => Countries::NIGERIA,
       "currency" => Currencies::NAIRA,
-      "bankCode" => "044",
-      "recipientAccount" => "0690000028",
+      "bankCode" => "058",
+      "recipientAccount" => "0123453241",
       "recipientName" => "Ridwan Olalere"
     ];
     $narration = "Testing";

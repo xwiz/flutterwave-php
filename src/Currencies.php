@@ -11,4 +11,9 @@ class Currencies {
    */
   const NAIRA = "NGN";
 
+  /**
+   * @var string currency code for USA
+   */
+  const USD = "USD";
+
 }
