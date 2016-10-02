@@ -12,10 +12,10 @@ class CardTest extends PHPUnit_Framework_TestCase {
 
   public function testTokenize() {
     $card = [
-      "card_no" => "4716542503552752",
-      "cvv" => "578",
+      "card_no" => "5043342567607506",
+      "cvv" => "248",
       "expiry_month" => "01",
-      "expiry_year" => "19"
+      "expiry_year" => "18"
     ];
 
     $resp = Card::tokenize($card, AuthModel::BVN, Flutterwave::SMS, "22254824829");
@@ -25,10 +25,10 @@ class CardTest extends PHPUnit_Framework_TestCase {
 
   public function testCharge() {
     $card = [
-      "card_no" => "4716542503552752",
-      "cvv" => "578",
+      "card_no" => "5043342567607506",
+      "cvv" => "248",
       "expiry_month" => "01",
-      "expiry_year" => "19"
+      "expiry_year" => "18"
     ];
     $resp = Card::charge($card, 1000, "1202", Currencies::NAIRA, Countries::NIGERIA, AuthModel::NOAUTH, "test", "");
     $this->assertTrue($resp->isSuccessfulResponse());
