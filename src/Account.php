@@ -8,7 +8,11 @@ class Account {
       "charge" => "http://staging1flutterwave.co:8080/pwc/rest/account/pay",
       "validate" => "http://staging1flutterwave.co:8080/pwc/rest/account/pay/validate"
     ],
-    "production" => []
+    "production" => [
+      "enquiry" => "https://prod1flutterwave.co:8181/pwc/rest/pay/resolveaccount",
+      "charge" => "https://prod1flutterwave.co:8181/pwc/rest/account/pay",
+      "validate" => "https://prod1flutterwave.co:8181/pwc/rest/account/pay/validate"
+    ]
   ];
 
   /**
