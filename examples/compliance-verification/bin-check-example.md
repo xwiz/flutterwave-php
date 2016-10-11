@@ -13,7 +13,7 @@ $env = "staging"; //this can be production when ready for deployment
 Flutterwave::setMerchantCredentials($merchantKey, $apiKey, $env);
 
 $first6digits = "763537";
-$result = Bin::check($ipAddress);
+$result = Bin::check($first6digits);
 //$result is an instance of ApiResponse class which has
 //methods like getResponseData(), getStatusCode(), getResponseCode(), isSuccessfulResponse()
 ```
