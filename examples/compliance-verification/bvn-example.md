@@ -29,7 +29,7 @@ if ($result->isSuccessfulResponse()) {
 //after verify request is successful you need to validate with otp sent to the bvn owner
 //validate the otp sent to the user
 $otp = "12345";
-$transactionRef = $resp['data']['transactionreference'];
+$transactionRef = $result['data']['transactionreference'];
 $result2 = Bvn::validate($bvn, $otp, $transactionRef);
 if ($result2->isSuccessfulResponse()) {
   echo("Thank you for verifying yourself");
@@ -37,5 +37,5 @@ if ($result2->isSuccessfulResponse()) {
 
 //if the user did not get an otp you can do resend otp with
 //the transaction reference is a parameter in the response from Bvn::verify() call
-$Bvn::resendOtp($transactionRef, Flutterwave::SMS);
+$result3 = Bvn::resendOtp($transactionRef, Flutterwave::SMS);
 ```
