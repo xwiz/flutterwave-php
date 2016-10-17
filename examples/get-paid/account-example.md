@@ -8,7 +8,7 @@ an otp which needs to be supplied to `validate` method then you can do `charge` 
 will then charge the account.
 
 ```PHP
-use Flutterwave\Account;
+use Flutterwave\AccessAccount;
 use Flutterwave\Flutterwave;
 
 //merchantKey and apiKey can be found in your flutter developer console
@@ -19,7 +19,7 @@ $env = "staging"; //this can be production when ready for deployment
 Flutterwave::setMerchantCredentials($merchantKey, $apiKey, $env);
 
 $accountNumber = ""; //account number you want to charge
-$result = Account::initiate($accountNumber);
+$result = AccessAccount::initiate($accountNumber);
 if ($result->isSuccessfulResponse()) {
   echo("Works");
 }
@@ -29,7 +29,7 @@ $ref = $resp['data']['transactionReference'];
 $otp = ""; //sent to account owners number
 $billingAmount = 1000;
 $narration = "payment for forLoop";
-$result2 = Account::validate($ref, $accountNumber, $otp, $billingAmount, $narration);
+$result2 = AccessAccount::validate($ref, $accountNumber, $otp, $billingAmount, $narration);
 
 if ($result2->isSuccessfulResponse()) {
   echo("Successfully validated");
@@ -39,7 +39,7 @@ if ($result2->isSuccessfulResponse()) {
 $resp2 = $result2->getResponseData();
 $token = $resp2['data']['accountToken'];
 $narration = "payment for forLoop";
-$result3 = Account::charge($token, $amount, $narration);
+$result3 = AccessAccount::charge($token, $amount, $narration);
 
 if ($result3->isSuccessfulResponse()) {
   echo("We have successfully charged this account for you");
