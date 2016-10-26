@@ -273,6 +273,41 @@ class Card {
   }
 
   /**
+   * for chaging cards Using Token
+   * @param  string $cardToken
+   * @param  int|double|float $amount  amount to charge
+   * @param  string $custId
+   * @param  string $currency
+   * @param  string $narration
+   * @return ApiResponse
+   */
+  public static function charge($cardToken, $amount, $custId, $currency, $country, $authModel, $narration, $cardType = "") {
+    FlutterValidator::validateClientCredentialsSet();
+
+    $key = Flutterwave::getApiKey();
+    $amount = FlutterEncrypt::encrypt3Des($amount, $key);
+    $custId = FlutterEncrypt::encrypt3Des($custId, $key);
+    $currency = FlutterEncrypt::encrypt3Des($currency, $key);
+    $narration = FlutterEncrypt::encrypt3Des($narration, $key);
+    $cardToken = FlutterEncrypt::encrypt3Des($cardToken, $key);
+    $country = FlutterEncrypt::encrypt3Des($country, $key);
+    $cardType = FlutterEncrypt::encrypt3Des($cardType, $key);
+
+    $resource = self::$resources[Flutterwave::getEnv()]['charge'];
+    $resp = (new ApiRequest($resource))
+              ->addBody("merchantid", $merchantKey)
+              ->addBody("amount", $amount)
+              ->addBody("custid", $custId)
+              ->addBody("currency", $currency)
+              ->addBody("narration", $narration)
+              ->addBody("cardtoken", $cardToken)
+              ->addBody("cardtype", $cardType)
+              ->addBody("country", $country)
+              ->makePostRequest();
+    return $resp;
+  }
+
+  /**
    * use this method to check the status of a transaction
    * @param  string $ref  transaction reference
    * @return ApiResponse
