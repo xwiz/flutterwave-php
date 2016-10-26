@@ -281,7 +281,7 @@ class Card {
    * @param  string $narration
    * @return ApiResponse
    */
-  public static function charge($cardToken, $amount, $custId, $currency, $country, $authModel, $narration, $cardType = "") {
+  public static function chargeToken($cardToken, $amount, $custId, $currency, $country, $authModel, $narration, $cardType = "") {
     FlutterValidator::validateClientCredentialsSet();
 
     $key = Flutterwave::getApiKey();
@@ -292,6 +292,7 @@ class Card {
     $cardToken = FlutterEncrypt::encrypt3Des($cardToken, $key);
     $country = FlutterEncrypt::encrypt3Des($country, $key);
     $cardType = FlutterEncrypt::encrypt3Des($cardType, $key);
+    $merchantKey = Flutterwave::getMerchantKey();
 
     $resource = self::$resources[Flutterwave::getEnv()]['charge'];
     $resp = (new ApiRequest($resource))
