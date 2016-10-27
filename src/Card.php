@@ -281,7 +281,7 @@ class Card {
    * @param  string $narration
    * @return ApiResponse
    */
-  public static function chargeToken($cardToken, $amount, $custId, $currency, $country, $authModel, $narration, $cardType = "") {
+  public static function chargeToken($cardToken, $amount, $custId, $currency, $country, $narration, $cardType = "") {
     FlutterValidator::validateClientCredentialsSet();
 
     $key = Flutterwave::getApiKey();
@@ -301,7 +301,7 @@ class Card {
               ->addBody("custid", $custId)
               ->addBody("currency", $currency)
               ->addBody("narration", $narration)
-              ->addBody("cardtoken", $cardToken)
+              ->addBody("chargetoken", $cardToken)
               ->addBody("cardtype", $cardType)
               ->addBody("country", $country)
               ->makePostRequest();
