@@ -74,7 +74,7 @@ $card = [
   "expiry_year" => "",
   "card_type" => "" //optional parameter. only needed if card was issued by diamond card
 ];
-$custId = "76464"; your users customer id
+$custId = "76464"; //your users customer id
 $currency = Currencies::NAIRA; //currency to charge the card
 $authModel = AuthModel::BVN; //can be BVN, NOAUTH, PIN, etc
 $narration = "narration for this transaction";
