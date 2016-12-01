@@ -33,13 +33,15 @@ class Card {
    * @param  string $bvn            card holder bvn
    * @return ApiResponse
    */
-  public static function tokenize($card, $authModel, $validateOption = "", $bvn = "") {
+  public static function tokenize($card, $authModel, $currency = "", $country ="", $validateOption = "", $bvn = "") {
     FlutterValidator::validateClientCredentialsSet();
     $key = Flutterwave::getApiKey();
     $cardNo = FlutterEncrypt::encrypt3Des($card['card_no'], $key);
     $expiryMonth = FlutterEncrypt::encrypt3Des($card['expiry_month'], $key);
     $expiryYear = FlutterEncrypt::encrypt3Des($card['expiry_year'], $key);
     $cvv = FlutterEncrypt::encrypt3Des($card['cvv'], $key);
+    $country = FlutterEncrypt::encrypt3Des($country, $key);
+    $currency = FlutterEncrypt::encrypt3Des($currency, $key);
     $authModel = FlutterEncrypt::encrypt3Des($authModel, $key);
     $validateOption = FlutterEncrypt::encrypt3Des($validateOption, $key);
     $bvn = FlutterEncrypt::encrypt3Des($bvn, $key);
@@ -51,6 +53,8 @@ class Card {
               ->addBody("merchantid", $merchantKey)
               ->addBody("cardno", $cardNo)
               ->addBody("cvv", $cvv)
+              ->addBody("country", $country)
+              ->addBody("currency", $currency)
               ->addBody("expirymonth", $expiryMonth)
               ->addBody("expiryyear", $expiryYear)
               ->addBody("authmodel", $authModel)
