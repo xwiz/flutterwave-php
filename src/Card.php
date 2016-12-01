@@ -33,7 +33,7 @@ class Card {
    * @param  string $bvn            card holder bvn
    * @return ApiResponse
    */
-  public static function tokenize($card, $authModel, $validateOption, $bvn = "") {
+  public static function tokenize($card, $authModel, $validateOption = "", $bvn = "") {
     FlutterValidator::validateClientCredentialsSet();
     $key = Flutterwave::getApiKey();
     $cardNo = FlutterEncrypt::encrypt3Des($card['card_no'], $key);
