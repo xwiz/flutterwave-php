@@ -16,4 +16,14 @@ class Currencies {
    */
   const USD = "USD";
 
+  /**
+   * @var string currency code for EUR
+   */
+  const EUR = "EUR";
+
+  /**
+   * @var string currency code for GBP
+   */
+  const GBP = "GBP";
+
 }
