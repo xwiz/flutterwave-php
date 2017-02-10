@@ -8,7 +8,7 @@ use Flutterwave\Flutterwave;
 use Flutterwave\Countries;
 use Flutterwave\Currencies;
 
-//merchantKey and apiKey can be found in your flutter developer console
+//merchantKey and apiKey can be found on your Flutterwave dashboard under settings
 //env can be production or staging depending on your stage of development
 $merchantKey = ""; //can be found on flutterwave dev portal
 $apiKey = ""; //can be found on flutterwave dev portal
@@ -26,8 +26,15 @@ if ($result->isSuccessfulResponse()) {
   echo("I have successfully linked an account.");
 }
 
-//After linking an account, you need to do double validation of that linked account
+
+//After linking an account, you need to do double validation of that linked account using the ref from the link account response
 //This is to authenticate that the account belongs to you
+//We will send an OTP to the phone number on the account as well do a random debit on the bank account
+//You are to supply the OTP and the random debit amount to us in two validation steps
+//The otp type for the the OTP validation is PHONE_OTP while that of the Random debit validation is ACCOUNT_DEBIT
+//Any of the two validations can come first, it doesnt matter, but after the second one has been done successfully, we will return an account token to you that you are to save for all calls to the Send Endpoint
+
+
 $response = $result->getResponseData();
 $linkingRef = $response['data']['uniquereference'];
 
@@ -82,6 +89,6 @@ if ($result5->isSuccessfulResponse()) {
 }
 
 echo "<pre>";
-	var_dump($response5['data']['linkedaccounts']);
+    var_dump($response5['data']['linkedaccounts']);
 echo "</pre>";	
 ```
