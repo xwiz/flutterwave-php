@@ -14,13 +14,15 @@ class Disbursement {
       "link" => "http://staging1flutterwave.co:8080/pwc/rest/pay/linkaccount/",
       "validate" => "http://staging1flutterwave.co:8080/pwc/rest/pay/linkaccount/validate/",
       "getLinkedAccounts" => "http://staging1flutterwave.co:8080/pwc/rest/pay/getlinkedaccounts",
-      "send" => "http://staging1flutterwave.co:8080/pwc/rest/pay/send"
+      "send" => "http://staging1flutterwave.co:8080/pwc/rest/pay/send",
+      "unlink" => "http://staging1flutterwave.co:8080/pwc/rest/pay/unlinkaccount"
     ],
     "production" => [
       "link" => "https://prod1flutterwave.co:8181/pwc/rest/pay/linkaccount/",
       "validate" => "https://prod1flutterwave.co:8181/pwc/rest/pay/linkaccount/validate/",
       "getLinkedAccounts" => "https://prod1flutterwave.co:8181/pwc/rest/pay/getlinkedaccounts",
-      "send" => "https://prod1flutterwave.co:8181/pwc/rest/pay/send"
+      "send" => "https://prod1flutterwave.co:8181/pwc/rest/pay/send",
+      "unlink" => "https://prod1flutterwave.co:8181/pwc/rest/pay/unlinkaccount"
     ]
   ];
 
@@ -124,6 +126,28 @@ class Disbursement {
               ->addBody("sendername", $encryptedSender)
               ->addBody("country", $encryptedcountry)
               ->addBody("currency", $encryptedcurrency)
+              ->makePostRequest();
+    return $resp;
+  }
+
+  /**
+  * use unlinkaccount to remove a linked and validated account
+  * @param string $accountnumber
+  * @param string $country
+  * @return ApiResponse
+  */
+  public static function unlinkaccount($accountnumber, $country) {
+    FlutterValidator::validateClientCredentialsSet();
+    
+    $key = Flutterwave::getApiKey();
+    $encryptedAccountNumber = FlutterEncrypt::encrypt3Des($accountnumber, $key);
+    $encryptedCountry = FlutterEncrypt::encrypt3Des($country, $key);
+
+    $resource = self::$disburseResources[Flutterwave::getEnv()]["unlink"];
+    $resp = (new ApiRequest($resource))
+              ->addBody("merchantid", Flutterwave::getMerchantKey())
+              ->addBody("accountnumber", $encryptedAccountNumber)
+              ->addBody("country", $encryptedCountry)
               ->makePostRequest();
     return $resp;
   }
