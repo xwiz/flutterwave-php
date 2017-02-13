@@ -90,5 +90,13 @@ if ($result5->isSuccessfulResponse()) {
 
 echo "<pre>";
     var_dump($response5['data']['linkedaccounts']);
-echo "</pre>";	
+echo "</pre>";
+
+$accountnumber = "0690000031", $country = "NG";
+$result6 = Disbursement::unlink($accountnumber, $country);
+$response6 = $result6->getResponseData();
+
+if ($result6->isSuccessfulResponse()) {
+  echo("I have successfully unlinked the account");
+}
 ```
