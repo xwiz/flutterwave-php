@@ -12,6 +12,7 @@ class Card {
       "preauth" => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/preauthorize/",
       "capture" => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/capture/",
       "refund" => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/refund/",
+      "avs" => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/avs/pay",
       "status" => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/status"
     ],
     "production" => [
@@ -21,6 +22,7 @@ class Card {
       "preauth" => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/preauthorize/",
       "capture" => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/capture/",
       "refund" => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/refund/",
+      "avs" => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/avs/pay",
       "status" => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/status"
     ]
   ];
@@ -308,6 +310,82 @@ class Card {
               ->addBody("chargetoken", $cardToken)
               ->addBody("cardtype", $cardType)
               ->addBody("country", $country)
+              ->makePostRequest();
+    return $resp;
+  }
+
+  /**
+   * for chaging cards Using AVS
+   * @param  array $card
+   * @param  int|double|float $amount  amount to charge
+   * @param  string $currency
+   * @param  string $country
+   * @param  string $narration
+   * @param  string $trxreference
+   * @return ApiResponse
+   */
+  public static function chargeAvs($card, $amount, $currency, $country, $narration, $trxreference) {
+    FlutterValidator::validateClientCredentialsSet();
+
+    $key = Flutterwave::getApiKey();
+    $cardNo = FlutterEncrypt::encrypt3Des($card['card_no'], $key);
+    $expiryMonth = FlutterEncrypt::encrypt3Des($card['expiry_month'], $key);
+    $expiryYear = FlutterEncrypt::encrypt3Des($card['expiry_year'], $key);
+    $cvv = FlutterEncrypt::encrypt3Des($card['cvv'], $key);
+    $amount = FlutterEncrypt::encrypt3Des($amount, $key);
+    $currency = FlutterEncrypt::encrypt3Des($currency, $key);
+    $narration = FlutterEncrypt::encrypt3Des($narration, $key);
+    $country = FlutterEncrypt::encrypt3Des($country, $key);
+    $trxreference = FlutterEncrypt::encrypt3Des($trxreference, $key);
+    $cardName = FlutterEncrypt::encrypt3Des($card['card_name'], $key);
+    $cardAddressLine1 = FlutterEncrypt::encrypt3Des($card['card_address_line1'], $key);
+    $cardState = FlutterEncrypt::encrypt3Des($card['card_state'], $key);
+    $cardCity = FlutterEncrypt::encrypt3Des($card['card_city'], $key);
+    $cardCountry = FlutterEncrypt::encrypt3Des($card['card_country'], $key);
+    $pin = "";
+    if(isset($card['pin']) && !empty($card['pin'])){
+      $pin = FlutterEncrypt::encrypt3Des($card['pin'], $key);
+    }
+    $cardEmail = "";
+    if(isset($card['card_email']) && !empty($card['card_email'])){
+      $cardEmail = FlutterEncrypt::encrypt3Des($card['card_email'], $key);
+    }
+    $cardZip = "";
+    if(isset($card['card_zip']) && !empty($card['card_zip'])){
+      $cardZip = FlutterEncrypt::encrypt3Des($card['card_zip'], $key);
+    }
+    $cardPhoneType = "";
+    if(isset($card['card_phone_type']) && !empty($card['card_phone_type'])){
+      $cardPhoneType = FlutterEncrypt::encrypt3Des($card['card_phone_type'], $key);
+    }
+    $cardPhoneNumber = "";
+    if(isset($card['card_phone_number']) && !empty($card['card_phone_number'])){
+      $cardPhoneNumber = FlutterEncrypt::encrypt3Des($card['card_phone_number'], $key);
+    }
+    $merchantKey = Flutterwave::getMerchantKey();
+
+    $resource = self::$resources[Flutterwave::getEnv()]['avs'];
+    $resp = (new ApiRequest($resource))
+              ->addBody("merchantid", $merchantKey)
+              ->addBody("amount", $amount)
+              ->addBody("trxreference", $trxreference)
+              ->addBody("currency", $currency)
+              ->addBody("narration", $narration)
+              ->addBody("cardno", $cardNo)
+              ->addBody("expiryyear", $expiryYear)
+              ->addBody("expirymonth", $expiryMonth)
+              ->addBody("cvv", $cvv)
+              ->addBody("pin", $pin)
+              ->addBody("cardname", $cardName)
+              ->addBody("cardaddressline1", $cardAddressLine1)
+              ->addBody("country", $country)
+              ->addBody("cardstate", $cardState)
+              ->addBody("cardcity", $cardCity)
+              ->addBody("cardcountry", $cardCountry)
+              ->addBody("cardemail", $cardEmail)
+              ->addBody("cardzip", $cardZip)
+              ->addBody("cardphonetype", $cardPhoneType)
+              ->addBody("cardphonenumber", $cardPhoneNumber)
               ->makePostRequest();
     return $resp;
   }
