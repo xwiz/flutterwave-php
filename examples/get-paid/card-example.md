@@ -84,7 +84,7 @@ $response = Card::charge($card, $amount, $custId, $currency, $country, $authMode
 
 //Important note
 //when using VBVSECURECODE as the AuthModel you will need to decrypt responsehtml field in the response data
-//of a successful request
+//of a successful request and load it in an iFrame or redirect your user to the auth url parameter
 //your key here is your apiKey from flutterwave dashboard
 $plain = FlutterEncrypt::decrypt3Des($responsehtml, $key);
 
@@ -216,6 +216,47 @@ $amount = 1000; //amount to capture.
 $currency = Currencies::NAIRA;
 $result = Card::void($authRef, $transId, $amount, $currency);
 if ($result->isSuccessfulResponse()) {
+  echo("Hurray!");
+}
+```
+
+#### AVS
+This operation can be used to charge a card using AVS
+
+```PHP
+use Flutterwave\Card;
+use Flutterwave\Flutterwave;
+use Flutterwave\Currencies;
+use Flutterwave\Countries;
+use Flutterwave\FlutterEncrypt;
+
+Flutterwave::setMerchantCredentials($merchantKey, $apiKey, $env);
+
+$card = [
+  "card_no" => "",
+  "cvv" => "",
+  "expiry_month" => "",
+  "expiry_year" => "",
+  "pin" => "", //Optional parameter
+  "card_name" => "", //Optional parameter
+  "card_address_line1" => "",
+  "card_state" => "",
+  "card_city" => "",
+  "card_country" => "", //Optional parameter
+  "card_email" => "", //Optional parameter
+  "card_zip" => "", //Optional parameter
+  "card_phone_type" => "", //Optional parameter
+  "card_phone_number" => "", //Optional parameter
+];
+$amount = "1000";
+$currency = Currencies::NAIRA; //currency to charge the card
+$narration = "narration for this transaction";
+$country = Countries::NIGERIA;
+$trxreference = "";
+
+$response = Card::chargeAvs($card, $amount, $currency, $country, $narration, $trxreference);
+
+if ($response->isSuccessfulResponse()) {
   echo("Hurray!");
 }
 ```
