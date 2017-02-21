@@ -40,11 +40,14 @@ class Account {
    * @param  string $accountNumber  account number to charge
    * @param  string $bankCode       bank code of the account to charge
    * @param  string $passCode       password
-   * @param  array $paymentDetails ['amount'=>'', 'currency'=>'', 'narration'=> '', 'email'=>'', 'firstname'=>'', 'lastname'=>'']
+   * @param  array $paymentDetails ['amount'=>'', 'currency'=>'', 'narration'=> '', 'email'=>'', 'firstname'=>'', 'lastname'=>'', 'phonenumber'=>'']
    * @param  string $ref            reference
+   * @param  string $responseUrl            redirect url on your page to call back with response
+   * @param  string $authModel            Authentication model of charge, can be AUTH or NOAUTH
+   * @param  string $accountToken            Account token gotten from previous successful charge
    * @return ApiResponse
    */
-  public static function charge($accountNumber, $bankCode, $passCode, $paymentDetails, $ref) {
+  public static function charge($accountNumber, $bankCode, $passCode = "", $paymentDetails, $ref, $responseUrl = "", $authModel = "", $accountToken = "") {
     $key = Flutterwave::getApiKey();
     $accountNumber = FlutterEncrypt::encrypt3Des($accountNumber, $key);
     $bankCode = FlutterEncrypt::encrypt3Des($bankCode, $key);
@@ -56,6 +59,10 @@ class Account {
     $firstname = FlutterEncrypt::encrypt3Des($paymentDetails['firstname'], $key);
     $lastname = FlutterEncrypt::encrypt3Des($paymentDetails['lastname'], $key);
     $email = FlutterEncrypt::encrypt3Des($paymentDetails['email'], $key);
+    $phonenumber = FlutterEncrypt::encrypt3Des($paymentDetails['phonenumber'], $key);
+    $responseurl = FlutterEncrypt::encrypt3Des($responseUrl, $key);
+    $authmodel = FlutterEncrypt::encrypt3Des($authModel, $key);
+    $accounttoken = FlutterEncrypt::encrypt3Des($accountToken, $key);
 
     $url = self::$resources[Flutterwave::getEnv()]["charge"];
     $resp = (new ApiRequest($url))
@@ -68,7 +75,11 @@ class Account {
               ->addBody("firstname", $firstname)
               ->addBody("lastname", $lastname)
               ->addBody("email", $email)
+              ->addBody("phonenumber", $phonenumber)
               ->addBody("transactionreference", $ref)
+              ->addBody("authmodel", $authmodel)
+              ->addBody("responseurl", $responseurl)
+              ->addBody("accounttoken", $accounttoken)
               ->addBody("merchantid", Flutterwave::getMerchantKey())
               ->makePostRequest();
     return $resp;
@@ -76,18 +87,21 @@ class Account {
 
   /**
    * validate an account charge
-   * @param  string $otp one time password
+   * @param  string $parameter validation parameter
+   * @param  string $value validation value
    * @param  string $ref reference
    * @return ApiResponse
    */
-  public static function validate($otp, $ref) {
+  public static function validate($parameter, $value, $ref) {
     $key = Flutterwave::getApiKey();
-    $otp = FlutterEncrypt::encrypt3Des($otp, $key);
+    $parameter = FlutterEncrypt::encrypt3Des($ref, $key);
+    $value = FlutterEncrypt::encrypt3Des($parameter, $value, $ref);
     $ref = FlutterEncrypt::encrypt3Des($ref, $key);
 
     $url = self::$resources[Flutterwave::getEnv()]["validate"];
     $resp = (new ApiRequest($url))
-              ->addBody("otp", $otp)
+              ->addBody("validateparameter", $parameter)
+              ->addBody("validateparametervalue", $value)
               ->addBody("transactionreference", $ref)
               ->addBody("merchantid", Flutterwave::getMerchantKey())
               ->makePostRequest();
