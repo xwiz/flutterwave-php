@@ -94,8 +94,8 @@ class Account {
    */
   public static function validate($parameter, $value, $ref) {
     $key = Flutterwave::getApiKey();
-    $parameter = FlutterEncrypt::encrypt3Des($ref, $key);
-    $value = FlutterEncrypt::encrypt3Des($parameter, $value, $ref);
+    $parameter = FlutterEncrypt::encrypt3Des($parameter, $key);
+    $value = FlutterEncrypt::encrypt3Des($value, $key);
     $ref = FlutterEncrypt::encrypt3Des($ref, $key);
 
     $url = self::$resources[Flutterwave::getEnv()]["validate"];

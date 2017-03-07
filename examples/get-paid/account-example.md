@@ -39,7 +39,7 @@ if ($result->isSuccessfulResponse()) {
 }
 
 $resp = $result->getResponseData();
-$parameter = $resp['data']['authparams']['validateparameter'];
+$parameter = $resp['data']['authparams'][0]['validateparameter'];
 $value = ""; //sent to account owners number
 $ref = $resp['data']['transactionreference'];
 
@@ -47,16 +47,6 @@ $result2 = Account::validate($parameter, $value, $ref);
 
 if ($result2->isSuccessfulResponse()) {
   echo("Successfully validated");
-}
-
-//this method will charge an account after validating the account
-$resp2 = $result2->getResponseData();
-$token = $resp2['data']['accountToken'];
-$narration = "payment for forLoop";
-$result3 = AccessAccount::charge($token, $amount, $narration);
-
-if ($result3->isSuccessfulResponse()) {
-  echo("We have successfully charged this account for you");
 }
 
 ```

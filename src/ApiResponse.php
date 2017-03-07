@@ -4,7 +4,7 @@ namespace Flutterwave;
 class ApiResponse {
   private $isSuccessfulResponse = false;
   private $statusCode;
-  private $responseCode = "00";
+  private $responseCode = null;
   private $responseMessage;
   private $responseData;
   private $requiresValidation = false;
