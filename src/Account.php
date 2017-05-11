@@ -54,6 +54,10 @@ class Account {
     $passCode = FlutterEncrypt::encrypt3Des($passCode, $key);
     $ref = FlutterEncrypt::encrypt3Des($ref, $key);
     $amount = FlutterEncrypt::encrypt3Des($paymentDetails['amount'], $key);
+    $country = "";
+    if(isset($paymentDetails['country']) && !empty($paymentDetails['country'])){
+      $country = FlutterEncrypt::encrypt3Des($paymentDetails['country'], $key);
+    }
     $currency = FlutterEncrypt::encrypt3Des($paymentDetails['currency'], $key);
     $narration = FlutterEncrypt::encrypt3Des($paymentDetails['narration'], $key);
     $firstname = FlutterEncrypt::encrypt3Des($paymentDetails['firstname'], $key);
@@ -72,6 +76,7 @@ class Account {
               ->addBody("passcode", $passCode)
               ->addBody("amount", $amount)
               ->addBody("currency", $currency)
+              ->addBody("country", $country)
               ->addBody("firstname", $firstname)
               ->addBody("lastname", $lastname)
               ->addBody("email", $email)
