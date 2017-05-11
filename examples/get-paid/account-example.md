@@ -24,6 +24,7 @@ $paymentDetails = [
 	"lastname" => "",
 	"email" => "",
 	"phonenumber" => "",
+	"country" => ""
 ];
 
 $accountNumber = ""; //account number you want to charge
