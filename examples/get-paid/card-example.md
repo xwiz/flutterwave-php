@@ -22,7 +22,7 @@ use Flutterwave\AuthModel;
 use Flutterwave\Countries;
 use Flutterwave\FlutterEncrypt;
 
-$merchantkey = "744hdhhg"; //merchant key on flutterwave dev portal
+$merchantKey = "744hdhhg"; //merchant key on flutterwave dev portal
 $apiKey = "58jdjdjd"; //merchant api key on flutterwave dev portal
 $env = "staging"; //can be staging or production
 Flutterwave::setMerchantCredentials($merchantKey, $apiKey, $env);
@@ -62,7 +62,7 @@ use Flutterwave\Currencies;
 use Flutterwave\Countries;
 use Flutterwave\FlutterEncrypt;
 
-$merchantkey = "744hdhhg"; //merchant key on flutterwave dev portal
+$merchantKey = "744hdhhg"; //merchant key on flutterwave dev portal
 $apiKey = "58jdjdjd"; //merchant api key on flutterwave dev portal
 $env = "staging"; //can be staging or production
 Flutterwave::setMerchantCredentials($merchantKey, $apiKey, $env);
@@ -137,7 +137,7 @@ use Flutterwave\AuthModel;
 use Flutterwave\Countries;
 use Flutterwave\FlutterEncrypt;
 
-$merchantkey = "744hdhhg"; //merchant key on flutterwave dev portal
+$merchantKey = "744hdhhg"; //merchant key on flutterwave dev portal
 $apiKey = "58jdjdjd"; //merchant api key on flutterwave dev portal
 $env = "staging"; //can be staging or production
 Flutterwave::setMerchantCredentials($merchantKey, $apiKey, $env);
