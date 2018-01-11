@@ -4,7 +4,31 @@ use Flutterwave\FlutterEncrypt;
 use Flutterwave\FlutterValidator;
 
 class Card {
-  private static $resources = [
+    
+  private static $resourcesV2 = [
+    "staging" => [
+      'tokenize' => "https://flutterwavestagingv2.com/pwc/rest/card/mvva/tokenize/",
+      'charge' => "https://flutterwavestagingv2.com/pwc/rest/card/mvva/pay/",
+      'validate' => "https://flutterwavestagingv2.com/pwc/rest/card/mvva/pay/validate/",
+      "preauth" => "https://flutterwavestagingv2.com/pwc/rest/card/mvva/preauthorize/",
+      "capture" => "https://flutterwavestagingv2.com/pwc/rest/card/mvva/capture/",
+      "refund" => "https://flutterwavestagingv2.com/pwc/rest/card/mvva/refund/",
+      "avs" => "https://flutterwavestagingv2.com/pwc/rest/card/mvva/avs/pay",
+      "status" => "https://flutterwavestagingv2.com/pwc/rest/card/mvva/status"
+    ],
+    "production" => [
+      'tokenize' => "https://flutterwaveprodv2.com/pwc/rest/card/mvva/tokenize/",
+      'charge' => "https://flutterwaveprodv2.com/pwc/rest/card/mvva/pay/",
+      'validate' => "https://flutterwaveprodv2.com/pwc/rest/card/mvva/pay/validate/",
+      "preauth" => "https://flutterwaveprodv2.com/pwc/rest/card/mvva/preauthorize/",
+      "capture" => "https://flutterwaveprodv2.com/pwc/rest/card/mvva/capture/",
+      "refund" => "https://flutterwaveprodv2.com/pwc/rest/card/mvva/refund/",
+      "avs" => "https://flutterwaveprodv2.com/pwc/rest/card/mvva/avs/pay",
+      "status" => "https://flutterwaveprodv2.com/pwc/rest/card/mvva/status"
+    ]
+  ];
+    
+  private static $resourcesV1 = [
     "staging" => [
       'tokenize' => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/tokenize/",
       'charge' => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/pay/",
@@ -26,6 +50,24 @@ class Card {
       "status" => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/status"
     ]
   ];
+    
+  public static $resources;
+
+  public static function init($version = 1)
+  {
+    switch($version)
+    {
+      case 1:
+        self::$resources = self::$resourcesV1;
+        break;
+      case 2:
+        self::$resources = self::$resourcesV2;
+        break;
+      default:
+        self::$resources = self::$resourcesV2;
+        break;
+    }
+  }
 
   /**
    * can be used to tokenize a card for future charges

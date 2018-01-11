@@ -38,4 +38,8 @@ require_once 'path_to_vendor/autoload.php';
 ### Get Started
 To get started using Flutterwave-PHP visit [here](https://github.com/Flutterwave/flutterwave-php/tree/master/examples) to see code examples.
 
+### Note
+
+If you are using V2 of the API with Card payments. Call `Card::init(2);` to initialize version 2 before payments.
+
 ### Please note that a success status on our response does not always mean that the payment was successful, it most probably simply means that we were able to make an attempt in processing the payment. This means that you as a customer has to ensure that you check the content of the data returned for the proper response, for response codes and response messages especially.
