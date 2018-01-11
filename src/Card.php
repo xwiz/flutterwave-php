@@ -51,7 +51,28 @@ class Card {
     ]
   ];
     
-  public static $resources;
+  private static $resources = [
+    "staging" => [
+      'tokenize' => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/tokenize/",
+      'charge' => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/pay/",
+      'validate' => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/pay/validate/",
+      "preauth" => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/preauthorize/",
+      "capture" => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/capture/",
+      "refund" => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/refund/",
+      "avs" => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/avs/pay",
+      "status" => "http://staging1flutterwave.co:8080/pwc/rest/card/mvva/status"
+    ],
+    "production" => [
+      'tokenize' => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/tokenize/",
+      'charge' => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/pay/",
+      'validate' => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/pay/validate/",
+      "preauth" => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/preauthorize/",
+      "capture" => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/capture/",
+      "refund" => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/refund/",
+      "avs" => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/avs/pay",
+      "status" => "https://prod1flutterwave.co:8181/pwc/rest/card/mvva/status"
+    ]
+  ];
 
   public static function init($version = 1)
   {
